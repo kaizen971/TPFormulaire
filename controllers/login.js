@@ -37,7 +37,6 @@ export function postLogin(req, res){
       if(error.length > 0 ){
         return res.render("login",{errors:error});
       }
-      // check if the password is valid
       const passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
       if (!passwordIsValid){
         error.push({title:"Mot de passe invalide",description: "Votre mot de passe est invalide"})
@@ -45,12 +44,9 @@ export function postLogin(req, res){
       if(error.length > 0 ){
         return res.render("login",{errors:error});
       }
-      // if user is found and password is valid
-      // create a token
        req.session.token = jwt.sign({ email: req.body.email }, APP_SECRET, {
-        expiresIn: 86400 // expires in 24 hours
+        expiresIn: 86400 
       });
-      // return the information including token as JSON
       res.redirect("/dashboard");
     });
   };
