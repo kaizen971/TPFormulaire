@@ -1,0 +1,9 @@
+extends layouts/frontend
+
+block content
+    button.button(onclick="location.href='/logout'") Déconnexion
+    if successMessage
+        div.alert.alert-success
+    p.alert.alert-success|  #{successMessage}
+    h1 DashBoard
+    p Vous êtes connecté
